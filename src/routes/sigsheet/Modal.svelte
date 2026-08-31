@@ -4,7 +4,7 @@
     const { member_id, member_name, role, closeModal, activeCategory } = $props();
     // Implement color of name
 
-    const categoryColors: Record<string, string> = {
+    /* const categoryColors: Record<string, string> = {
         Exec: 'var(--color-csi-blue)',
         'M&I': 'var(--color-mni-pink)',
         Service: 'var(--color-service-yellow)',
@@ -12,7 +12,7 @@
         Engg: 'var(--color-engg-blue)',
         Exte: 'var(--color-exte-blue)',
         'B&C': 'var(--color-bnc-green)',
-    };
+    }; */
 
     let imageURL = $state<string | null>(null);
     let statusMessage = $state<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -108,10 +108,10 @@
                 <div class="mx-2 gap-2 flex flex-col">
                     {#if activeCategory !== 'CoApp'}
                         <div class="px-2 border-4 border-b-stardew-border-light border-l-stardew-border-light border-t-stardew-border-shadow border-r-stardew-border-shadow">
-                            <h2 class="pb-1 text-3xl font-stardew-body md:text-5xl" style="color:{categoryColors[activeCategory]}">
+                            <h2 class="pb-1 text-3xl font-stardew-body md:text-5xl text-stardew-font-color">
                                 {member_name}
                             </h2>
-                            <h3 class="text-csi-white text-xl font-stardew-body">{role}</h3>
+                            <h3 class="text-stardew-font-color text-xl font-stardew-body">{role}</h3>
                         </div>
                         
                         <input type="text" name="member_id" value={member_id} hidden required />
@@ -154,7 +154,7 @@
                     {/if}
 
                     <div class="px-2 border-4 border-b-stardew-border-light border-l-stardew-border-light border-t-stardew-border-shadow border-r-stardew-border-shadow">
-                        <label for="question" class="text-csi-white mb-1 block pt-5 text-xl font-stardew-body md:text-3xl">
+                        <label for="question" class="text-stardew-font-color mb-1 block pt-5 text-xl font-stardew-body md:text-3xl">
                             Your Question
                         </label>
                         <textarea
@@ -168,7 +168,7 @@
                     </div>
 
                     <div class="px-2 border-4 border-b-stardew-border-light border-l-stardew-border-light border-t-stardew-border-shadow border-r-stardew-border-shadow">
-                        <label for="answer" class="text-csi-white mb-1 block text-xl font-stardew-body md:text-3xl">
+                        <label for="answer" class="text-stardew-font-color mb-1 block text-xl font-stardew-body md:text-3xl">
                             Their Answer
                         </label>
                         <textarea
@@ -183,58 +183,61 @@
                 </div>
 
                 <!-- Right column -->
-                <div class="mx-2 flex flex-col items-center justify-center gap-5">
+                
+                <div class="flex flex-col items-center justify-center gap-5 p-8">
                     <!-- Image uploader -->
-                    <label
-                        for="img-input"
-                        class="border-csi-blue box-border flex min-h-[200px] w-full flex-col items-center justify-center rounded-lg border-2 p-6"
-                        style="background-color: rgba(0, 198, 215, 0.07);"
-                    >
-                        <input
-                            type="file"
-                            accept="image/*"
-                            id="img-input"
-                            name="image"
-                            onchange={handleFileChange}
-                            hidden
-                            required
-                        />
+                    <div class="p-0.5 bg-stardew-border-fill relative flex justify-center align-middle border-4 border-stardew-border-dark rounded-md">
+                        <label
+                            for="img-input"
+                            class="flex min-h-[200px] w-full aspect-2/3 flex-col items-center justify-center p-6 bg-[url('/assets/bg_images/stardew_valley_image_bg.svg')] bg-cover bg-center bg-no-repeat border-4 border-stardew-border-dark rounded-sm"
+                            style="background-color: rgba(0, 198, 215, 0.07);"
+                        >
+                            <input
+                                type="file"
+                                accept="image/*"
+                                id="img-input"
+                                name="image"
+                                onchange={handleFileChange}
+                                hidden
+                                required
+                            />
 
-                        <div class="flex w-full items-center justify-center">
-                            {#if imageURL}
-                                <img
-                                    src={imageURL}
-                                    alt="selfie with member"
-                                    class="aspect-square h-40 w-40 max-w-full rounded-2xl object-cover md:h-56 md:w-56"
-                                />
-                            {:else}
-                                <div class="flex flex-col items-center justify-center px-4">
-                                    <!-- Responsive SVG size using Tailwind -->
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="1.0"
-                                        stroke="#00C6D7"
-                                        class="aspect-square h-30 w-30 max-w-full rounded-2xl object-cover md:my-6 md:h-30 md:w-30"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
-                                        />
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
-                                        />
-                                    </svg>
+                            <div class="flex w-full items-center justify-center">
+                                {#if imageURL}
+                                    <img
+                                        src={imageURL}
+                                        alt="selfie with member"
+                                        class="aspect-square h-40 w-40 max-w-full rounded-lg object-cover md:h-56 md:w-56"
+                                    />
+                                {:else}
+                                    <div class="flex flex-col items-center justify-center px-4">
+                                        <!-- Responsive SVG size using Tailwind -->
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.0"
+                                            stroke="#212121"
+                                            class="aspect-square h-30 w-30 max-w-full rounded-2xl object-cover md:my-6 md:h-30 md:w-30"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
+                                            />
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
+                                            />
+                                        </svg>
 
-                                    <p class="text-csi-blue mt-2 text-center text-4xl font-stardew-body">Click to submit</p>
-                                </div>
-                            {/if}
-                        </div>
-                    </label>
+                                        <p class="text-csi-white mt-2 text-center text-4xl font-stardew-body">Click to submit</p>
+                                    </div>
+                                {/if}
+                            </div>
+                        </label>
+                    </div>
 
                     {#if statusMessage}
                         <p
