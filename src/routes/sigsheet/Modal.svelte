@@ -81,7 +81,7 @@
                 <button
                     aria-label="Close modal"
                     onclick={closeModal}
-                    class="text-csi-white hover:text-csi-blue cursor-pointer font-stardew-body text-4xl"
+                    class="text-engg-blue hover:text-csi-blue cursor-pointer font-stardew-body text-4xl"
                 >
                     <!-- <svg
                         xmlns="http://www.w3.org/2000/svg"
