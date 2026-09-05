@@ -21,6 +21,6 @@
     // });
 </script>
 
-<main class="min-h-screen bg-[#161619]">
+<main class="min-h-screen bg-gradient-to-b from-stardew-bg-light to-stardew-bg-dark">
     <MemberGrid />
 </main>
